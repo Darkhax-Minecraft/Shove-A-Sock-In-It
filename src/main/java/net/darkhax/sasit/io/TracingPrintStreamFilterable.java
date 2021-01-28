@@ -14,20 +14,20 @@ import net.minecraftforge.fml.common.TracingPrintStream;
  */
 public class TracingPrintStreamFilterable extends TracingPrintStream {
 
-	protected Logger logger;
+    protected Logger logger;
     protected int BASE_DEPTH = 3;
 
-	public TracingPrintStreamFilterable (Logger logger, PrintStream stream) {
+    public TracingPrintStreamFilterable (Logger logger, PrintStream stream) {
         super(logger, stream);
         this.logger = logger;
     }
 
-	@Override
+    @Override
     public void println (Object o) {
-		// We can't simply call .println(String s) because it will break .getPrefix()
-    	String s = String.valueOf(o);
+        // We can't simply call .println(String s) because it will break .getPrefix()
+        String s = String.valueOf(o);
         if (!ConfigurationHandler.requiresFiltering(s)) {
-        	logger.info("{}{}", getPrefix(), s);
+            logger.info("{}{}", getPrefix(), s);
         }
     }
 
@@ -35,7 +35,7 @@ public class TracingPrintStreamFilterable extends TracingPrintStream {
     public void println (String s) {
 
         if (!ConfigurationHandler.requiresFiltering(s)) {
-        	logger.info("{}{}", getPrefix(), s);
+            logger.info("{}{}", getPrefix(), s);
         }
     }
 
@@ -48,7 +48,7 @@ public class TracingPrintStreamFilterable extends TracingPrintStream {
     }
     
     /**
-     * @see TracingPrintStream.getPrefix() 
+     * @see TracingPrintStream.getPrefix()
      */
     private String getPrefix() {
         StackTraceElement[] elems = Thread.currentThread().getStackTrace();
