@@ -6,7 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.darkhax.sasit.handler.ConfigurationHandler;
-import net.darkhax.sasit.io.PrintStreamFilterable;
+import net.darkhax.sasit.io.TracingPrintStreamFilterable;
 import net.darkhax.sasit.libs.LoggerUtils;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -31,7 +31,8 @@ public class SASIT {
 
         // Generic system outstream
         if (ConfigurationHandler.filterGeneric) {
-            System.setOut(new PrintStreamFilterable(System.out));
+            System.setOut(new TracingPrintStreamFilterable(LogManager.getLogger("STDOUT"), System.out));
+            System.setErr(new TracingPrintStreamFilterable(LogManager.getLogger("STDERR"), System.err));
         }
 
         // Root Oracle/Java logger
